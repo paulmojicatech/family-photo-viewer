@@ -1,0 +1,26 @@
+<div class="login-container" [formGroup]="loginForm">
+    <div class="login-form">
+        <div class="row">
+            <div class="col">
+                <label>Login ID</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <input type="text" formControlName="loginId" />
+            </div>
+        </div>
+        <div class="row separate">
+            <div class="col">
+                <label>Password</label>
+            </div>
+            <div class="col">
+                <input type="password" formControlName="password" />
+            </div>
+        </div>
+        <div class="row separate">
+            <div class="col">
+                <button class="primary" (click)="login()">Login</button>
+            </div>
+        </div>
+    </div>

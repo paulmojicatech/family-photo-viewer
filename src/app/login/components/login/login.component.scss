@@ -1,0 +1,25 @@
+.login-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.login-form {
+    .separate {
+        margin: 1rem;
+    }
+    width: 50%;
+    height: 75%;
+    display: flex;
+    padding: 2rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: solid 2px #D8D8DA;
+    border-radius: 4px;
+}

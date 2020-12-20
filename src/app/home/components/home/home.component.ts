@@ -12,9 +12,4 @@ export class HomeComponent {
 
   constructor(private _http: HttpService) { }
 
-  uploadFile(): void {
-    const file = this.fileInput.nativeElement.files;
-    this._http.uploadFile(file[0]).subscribe(response => console.log('RESP', response.message));
-  }
-
 }

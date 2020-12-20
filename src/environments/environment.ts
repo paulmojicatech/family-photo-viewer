@@ -2,9 +2,12 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import { AUTH_URL } from '../env';
+
 export const environment = {
   production: false,
-  baseUploadLoc: '../uploads'
+  baseUploadLoc: '../uploads',
+  authUrl: AUTH_URL
 };
 
 /*

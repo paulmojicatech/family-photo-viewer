@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -9,11 +11,15 @@ export class HttpService {
 
   constructor(private _httpClient: HttpClient) { }
 
-  uploadFile(file: File): Observable<any> {
-    const formData = new FormData();
-    formData.append('file', file, file.name);
+  login(loginCreds: { user: string, password: string}): Observable<boolean> {
+    const { user, password } = loginCreds;
     const headers = new HttpHeaders();
-    headers.append('content-type', 'multipart/form-data');
-    return this._httpClient.post<any>('http://localhost:7071/api/UploadFile', formData, { headers });
+    headers.append('Content-Type', 'application/json');
+    return this._httpClient.post(`${environment.authUrl}`, { user, password }, { headers }).pipe(
+      map(() => true),
+      catchError(() => {
+        return throwError(false);
+      })
+    );
   }
 }

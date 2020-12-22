@@ -6,13 +6,14 @@ import { AppComponent } from './app.component';
 import { Route, RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IonicModule } from '@ionic/angular';
-
+import { AuthGuardService } from './services/auth-guard.service';
 
 
 const routes: Route[] = [
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
+    loadChildren: () => import('./home/home.module').then(m => m.HomeModule),
+    canActivate: [ AuthGuardService ]
   },
   {
     path: '',

@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { Route, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { HomeComponent } from './components/home/home.component';
+import { SharedComponentsModule } from '../shared-components/shared-components.module';
 
 const routes: Route[] = [
     {
@@ -16,7 +17,8 @@ const routes: Route[] = [
     imports: [
         CommonModule,
         RouterModule.forChild(routes),
-        IonicModule
+        IonicModule,
+        SharedComponentsModule
     ],
     declarations: [HomeComponent]
 })

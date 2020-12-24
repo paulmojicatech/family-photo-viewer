@@ -1,5 +1,5 @@
 <div class="login-container" [formGroup]="loginForm">
-    <div class="login-form">
+    <div *ngIf="!showLoading; else spinnerSection" class="login-form">
         <div class="row">
             <div class="col">
                 <label>Login ID</label>
@@ -24,3 +24,11 @@
             </div>
         </div>
     </div>
+    <ng-template #spinnerSection>
+        <div class="spinner-section">
+            <ion-spinner color="primary"></ion-spinner>
+        </div>
+        
+    </ng-template>
+
+</div>

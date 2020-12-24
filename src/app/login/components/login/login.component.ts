@@ -12,6 +12,7 @@ import { HttpService } from 'src/app/services/http.service';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
+  showLoading: boolean = false;
 
   constructor(private _formBuilder: FormBuilder, private _httpService: HttpService, private _router: Router) { }
 
@@ -25,12 +26,14 @@ export class LoginComponent implements OnInit {
   login(): void {
     const user = this.loginForm.get('loginId').value;
     const password = this.loginForm.get('password').value;
+    this.showLoading = true;
     this._httpService.login({ user, password }).pipe(
       catchError(err => {
         alert('You do not have permissions to enter.');
         return EMPTY;
       })
     ).subscribe(isAuthenticated => {
+      this.showLoading = false;
       if (!!isAuthenticated) {
         this._router.navigate(['home']);
       }

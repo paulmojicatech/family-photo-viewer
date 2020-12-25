@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { EMPTY } from 'rxjs';
+import { EMPTY, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { HttpService } from 'src/app/services/http.service';
 
@@ -30,7 +30,8 @@ export class LoginComponent implements OnInit {
     this._httpService.login({ user, password }).pipe(
       catchError(err => {
         alert('You do not have permissions to enter.');
-        return EMPTY;
+        this.showLoading = false;
+        return of(false);
       })
     ).subscribe(isAuthenticated => {
       this.showLoading = false;

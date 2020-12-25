@@ -1,22 +1,26 @@
-from node
-# install chrome for protractor tests
-RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
-RUN sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-RUN apt-get update && apt-get install -yq google-chrome-stable
+from ubuntu
 
-# set working directory
-WORKDIR /app
+# update apt and install nginx, systemd, git, curl
+RUN apt-get update
+RUN apt-get -y install nginx
+RUN apt-get -y install systemd
+RUN apt-get -y install git
 
-# add `/app/node_modules/.bin` to $PATH
-ENV PATH /app/node_modules/.bin:$PATH
+# set work dir
+WORKDIR /var/www/family-photo-viewer
 
-# install and cache app dependencies
-COPY package.json /app/package.json
-# RUN npm install
-# RUN npm install -g @angular/cli@10
+# configure and init git
+RUN git config --global user.name "Paul Mojica"
+RUN git config --global user.email "paulmojicatech@gmail.com"
 
-# add app
-COPY . /app
+# copy dist folder
+COPY dist/* /var/www/html/
 
-# start app
-CMD ng serve --host 0.0.0.0
+# copy nginx conf
+COPY default /etc/nginx/sites-available/default
+
+# export port
+EXPOSE 80
+
+# run nginx
+CMD /usr/sbin/nginx && tail -f /dev/null
